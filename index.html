@@ -1,0 +1,410 @@
+<title>Juan Franco Audio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+  /* Layout: one column, liner-notes credit blocks, role tags set in mono. */
+  :root {
+    --bg: #faf9fb;
+    --surface: #ffffff;
+    --fg: #1a1722;
+    --muted: #645e71;
+    --line: #e3e0ea;
+    --accent: #4b21b5;
+    --font-display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121019;
+      --surface: #1b1825;
+      --fg: #eeebf4;
+      --muted: #9b94aa;
+      --line: #2d2839;
+      --accent: #ab8cff;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121019;
+    --surface: #1b1825;
+    --fg: #eeebf4;
+    --muted: #9b94aa;
+    --line: #2d2839;
+    --accent: #ab8cff;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 0 72px;
+  }
+
+  /* ---- masthead ---- */
+  .masthead { padding-block: 56px 40px; border-bottom: 1px solid var(--line); }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.1rem, 6vw, 3.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+  .role {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 18px;
+  }
+  .intro { font-size: 1.05rem; max-width: 62ch; margin: 0 0 24px; color: var(--fg); }
+  .intro + .intro { margin-top: -8px; }
+
+  .meta { display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 0.9rem; color: var(--muted); }
+  .meta a { color: var(--accent); }
+  .copybtn {
+    font: inherit; font-family: var(--font-mono); font-size: 0.82rem;
+    background: transparent; color: var(--accent);
+    border: 1px solid var(--line); border-radius: 4px;
+    padding: 2px 8px; cursor: pointer;
+  }
+  .copybtn:hover { border-color: var(--accent); }
+  .copybtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ---- sections ---- */
+  section { padding-block: 44px 0; }
+  h2 {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 6px;
+  }
+  .lede { color: var(--muted); font-size: 0.95rem; max-width: 60ch; margin: 0 0 22px; }
+
+  /* ---- credit entries ---- */
+  .work { border-top: 1px solid var(--line); padding-block: 22px; display: grid; gap: 10px; }
+  .work:last-child { border-bottom: 1px solid var(--line); }
+  .work-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+  .work h3 {
+    font-family: var(--font-display);
+    font-size: 1.22rem; font-weight: 500; letter-spacing: -0.01em;
+    margin: 0; text-wrap: balance; min-width: 0;
+  }
+  .year {
+    font-family: var(--font-mono); font-size: 0.82rem;
+    color: var(--muted); font-variant-numeric: tabular-nums;
+  }
+  .credits { display: flex; flex-wrap: wrap; gap: 6px; }
+  .credit {
+    font-family: var(--font-mono); font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    border: 1px solid var(--line); border-radius: 3px;
+    padding: 3px 8px; color: var(--muted);
+  }
+  .work p { margin: 0; max-width: 62ch; color: var(--fg); }
+  .links { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 0.9rem; }
+  .links a { color: var(--accent); font-family: var(--font-mono); font-size: 0.82rem; }
+
+  /* ---- tools ---- */
+  .tools { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .tool {
+    font-family: var(--font-mono); font-size: 0.75rem;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 3px; padding: 4px 9px; color: var(--muted);
+  }
+  .group { margin-bottom: 14px; }
+  .group-label {
+    font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 7px;
+  }
+
+  footer {
+    margin-top: 52px; padding-top: 22px;
+    border-top: 1px solid var(--line);
+    font-size: 0.88rem; color: var(--muted);
+  }
+  footer a { color: var(--accent); }
+
+  a { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <h1>Juan Carlos Franco Hernández</h1>
+    <p class="role">Music producer · Audio engineer · Audio post · Perceptual evaluation</p>
+    <p class="intro">Sixteen years recording, editing, mixing, mastering and producing music for artists and cultural institutions in the UK and Colombia. Sound design, Foley and voice-over sessions cut to picture, delivered to broadcast loudness specifications.</p>
+    <p class="intro">I also design and run the formal listening experiments that establish how audio is actually perceived — trained panels, written attribute scales, statistical analysis — work published in the <em>Journal of the Audio Engineering Society</em>, where I now review.</p>
+    <div class="meta">
+      <span>Granada, Spain · available remotely</span>
+      <span>francojuanca@gmail.com <button class="copybtn" id="copy-email" type="button">copy</button></span>
+      <a href="https://www.linkedin.com/in/juan-carlos-franco-audio">LinkedIn</a>
+      <a href="https://orcid.org/0000-0003-4018-7909">ORCID</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>Selected record credits</h2>
+    <p class="lede">Commercially released work. Roles are listed as they appear on the release.</p>
+
+    <article class="work">
+      <div class="work-head">
+        <h3>A Flor de Piel — Montañera</h3>
+        <span class="year">2023</span>
+      </div>
+      <div class="credits"><span class="credit">Recording engineer</span></div>
+      <p>Album by the London-based Colombian artist Montañera, funded and sponsored by Help Musicians. I engineered the recording sessions for the record.</p>
+      <div class="links"><a href="https://spoti.fi/3QT921l">Listen on Spotify</a></div>
+    </article>
+
+    <article class="work">
+      <div class="work-head">
+        <h3>Una república para las artes (1819–1888)</h3>
+        <span class="year">2019</span>
+      </div>
+      <div class="credits">
+        <span class="credit">Producer</span>
+        <span class="credit">Recording</span>
+        <span class="credit">Mixing</span>
+        <span class="credit">Mastering</span>
+      </div>
+      <p>A record of piano works by nineteenth-century Colombian composers, made in association with the Instituto Caro y Cuervo. Produced and engineered end to end, from session planning through to the master.</p>
+      <div class="links"><a href="https://spoti.fi/3IEUAqt">Listen on Spotify</a></div>
+    </article>
+  </section>
+
+  <section>
+    <h2>Solo recordings — El Juanca</h2>
+    <p class="lede">Every instrument and voice performed by me, then arranged, recorded, produced, mixed and mastered, with the video shot and post-produced myself. One pair of hands from the first take to the picture edit.</p>
+
+    <article class="work">
+      <div class="work-head">
+        <h3>Tú Ve</h3>
+        <span class="year">Kevin Johansen cover</span>
+      </div>
+      <div class="credits">
+        <span class="credit">Arrangement</span>
+        <span class="credit">Performance</span>
+        <span class="credit">Recording</span>
+        <span class="credit">Mix / master</span>
+        <span class="credit">Video</span>
+      </div>
+      <div class="links"><a href="https://www.youtube.com/watch?v=AaIyB3W4gD8">Watch on YouTube</a></div>
+    </article>
+
+    <article class="work">
+      <div class="work-head">
+        <h3>Staring at the Sky</h3>
+        <span class="year">Passenger cover</span>
+      </div>
+      <div class="credits">
+        <span class="credit">Arrangement</span>
+        <span class="credit">Performance</span>
+        <span class="credit">Recording</span>
+        <span class="credit">Mix / master</span>
+        <span class="credit">Video</span>
+      </div>
+      <div class="links"><a href="https://www.youtube.com/watch?v=VYSDk4SNSAw">Watch on YouTube</a></div>
+    </article>
+
+    <article class="work">
+      <div class="work-head">
+        <h3>Both channels</h3>
+      </div>
+      <div class="links">
+        <a href="https://www.youtube.com/@eljuancamusica">youtube.com/@eljuancamusica</a>
+        <a href="https://www.youtube.com/@francojuanca">youtube.com/@francojuanca</a>
+      </div>
+    </article>
+  </section>
+
+  <section>
+    <h2>Audio post and moving image</h2>
+    <p class="lede">Sound to picture: dialogue and voice-over, sound design, Foley, and delivery to broadcast loudness specifications.</p>
+
+    <article class="work">
+      <div class="work-head">
+        <h3>Elephants Dream — alternative soundtrack</h3>
+      </div>
+      <div class="credits">
+        <span class="credit">Sound design</span>
+        <span class="credit">Foley</span>
+        <span class="credit">Voice-over</span>
+        <span class="credit">Dialogue edit</span>
+        <span class="credit">Mix</span>
+        <span class="credit">Master</span>
+        <span class="credit">Delivery spec</span>
+      </div>
+      <p>A complete replacement soundtrack for the Blender Foundation's Creative Commons animated short. Working with one colleague, we discarded the original audio entirely and built every element back from nothing to picture: dialogue, voice-over, Foley and sound design. I led the work and took the mix and the master. A self-directed project, made to be heard against a film everyone in the field already knows.</p>
+      <div class="links"><a href="https://youtu.be/jI7j01hPbYE">youtu.be/jI7j01hPbYE</a></div>
+    </article>
+
+    <article class="work">
+      <div class="work-head">
+        <h3>University of Salford academic visit to Colombia</h3>
+        <span class="year">2026</span>
+      </div>
+      <div class="credits">
+        <span class="credit">Producer</span>
+        <span class="credit">Presenter</span>
+        <span class="credit">Interviewer</span>
+        <span class="credit">Audio + picture post</span>
+      </div>
+      <p>A video series documenting the visit, produced end to end to deadline across several cities: pre-production, location capture, interviews, edit and post for both audio and picture.</p>
+      <div class="links"><a href="https://projects.goqualifly.com/salford-colombia-2026">projects.goqualifly.com</a></div>
+    </article>
+  </section>
+
+  <section>
+    <h2>Evaluation and research</h2>
+    <p class="lede">Measuring what listeners actually hear, and writing it down so other people can apply it.</p>
+
+    <article class="work">
+      <div class="work-head">
+        <h3>A Multi-Angle, Multi-Distance Dataset of Microphone Impulse Responses</h3>
+        <span class="year">2022</span>
+      </div>
+      <div class="credits">
+        <span class="credit">Lead author</span>
+        <span class="credit">JAES 70(10)</span>
+      </div>
+      <p>Peer-reviewed paper in the <em>Journal of the Audio Engineering Society</em> describing a quasi-anechoic measurement method I designed, together with the instrumentation built to automate it. I review for the same journal.</p>
+      <div class="links"><a href="https://doi.org/10.17743/jaes.2022.0027">doi.org/10.17743/jaes.2022.0027</a></div>
+    </article>
+
+    <article class="work">
+      <div class="work-head">
+        <h3>Multi-Angle, Multi-Distance Microphone Impulse Response Dataset</h3>
+        <span class="year">2021</span>
+      </div>
+      <div class="credits">
+        <span class="credit">Open data</span>
+        <span class="credit">671 downloads</span>
+      </div>
+      <p>The measurements released openly on Zenodo. Machine-learning researchers now use the impulse responses to test how robust their models are to microphone variation — a use I did not anticipate when I recorded them.</p>
+      <div class="links"><a href="https://doi.org/10.5281/zenodo.4633508">doi.org/10.5281/zenodo.4633508</a></div>
+    </article>
+
+    <article class="work">
+      <div class="work-head">
+        <h3>Listening experiments and rubric design</h3>
+        <span class="year">2019–2026</span>
+      </div>
+      <div class="credits">
+        <span class="credit">Experiment design</span>
+        <span class="credit">Panel training</span>
+        <span class="credit">Statistics</span>
+      </div>
+      <p>Doctoral work at the Institute of Sound Recording, University of Surrey, submitted October 2026: stimulus preparation, screening and training listener panels, writing the attribute definitions and scales they judged against, and non-parametric analysis to separate real perceptual differences from noise.</p>
+    </article>
+  </section>
+
+  <section>
+    <h2>Talks and teaching</h2>
+    <p class="lede">Explaining technical audio to people who need to use it, in English and Spanish.</p>
+
+    <article class="work">
+      <div class="work-head">
+        <h3>Características tímbricas de la respuesta en micrófonos</h3>
+        <span class="year">Nov 2023</span>
+      </div>
+      <div class="credits"><span class="credit">Conference talk · 30 min</span></div>
+      <p>MUSEMA, Encuentro de investigación musical. How microphones are measured, how the listening experiments were run, and what the findings mean for recording, broadcast and live sound. Delivered in Spanish.</p>
+      <div class="links"><a href="https://youtu.be/mCvaLj0ysCs">youtu.be/mCvaLj0ysCs</a></div>
+    </article>
+
+    <article class="work">
+      <div class="work-head">
+        <h3>University teaching</h3>
+        <span class="year">2013–2025</span>
+      </div>
+      <div class="credits">
+        <span class="credit">Surrey</span>
+        <span class="credit">Javeriana</span>
+        <span class="credit">Los Andes</span>
+      </div>
+      <p>Audio Electronics and Electroacoustics to Tonmeister and Film Production &amp; Broadcast Engineering students at Surrey; lecturer in Audio Measurements and Instrumentation and thesis supervisor at Pontificia Universidad Javeriana.</p>
+    </article>
+  </section>
+
+  <section>
+    <h2>Tools</h2>
+    <div class="group">
+      <div class="group-label">Session</div>
+      <div class="tools">
+        <span class="tool">Pro Tools</span><span class="tool">Logic Pro</span><span class="tool">Ableton Live</span><span class="tool">Adobe Audition</span><span class="tool">iZotope RX</span><span class="tool">Loudness metering</span>
+      </div>
+    </div>
+    <div class="group">
+      <div class="group-label">Delivery</div>
+      <div class="tools">
+        <span class="tool">ATSC A/85</span><span class="tool">EBU R128</span><span class="tool">Stem delivery</span>
+      </div>
+    </div>
+    <div class="group">
+      <div class="group-label">Picture</div>
+      <div class="tools">
+        <span class="tool">Adobe Premiere</span>
+      </div>
+    </div>
+    <div class="group">
+      <div class="group-label">Measurement and analysis</div>
+      <div class="tools">
+        <span class="tool">MATLAB</span><span class="tool">Python</span><span class="tool">Max/MSP</span><span class="tool">SMAART</span><span class="tool">Room EQ Wizard</span><span class="tool">Dante</span><span class="tool">L-ISA</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Available for production, mixing, mastering, audio post and evaluation work. Reach me at francojuanca@gmail.com.</p>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var btn = document.getElementById('copy-email');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var email = 'francojuanca@gmail.com';
+      var done = function () {
+        btn.textContent = 'copied';
+        setTimeout(function () { btn.textContent = 'copy'; }, 1600);
+      };
+      try {
+        navigator.clipboard.writeText(email).then(done, function () {
+          btn.textContent = 'select it above';
+          setTimeout(function () { btn.textContent = 'copy'; }, 1600);
+        });
+      } catch (e) {
+        btn.textContent = 'select it above';
+        setTimeout(function () { btn.textContent = 'copy'; }, 1600);
+      }
+    });
+  })();
+</script>
